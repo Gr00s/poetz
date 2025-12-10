@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --poetz-blauw: #007ba4;
+  --poetz-oranje: #e85127;
+  --poetz-zeegroen: #24b1a0;
+  --kerst-goud: #ffd700;
+  --kerst-zilver: #c0c0c0;
+  --kerst-warmwit: #fff8e7;
+  --kerst-rood: #c41e3a;
+  --kerst-groen: #228b22;
+  --bg-night: #0a1628;
+  font-family: 'Arial Rounded MT Bold', 'Nunito', 'Quicksand', sans-serif;
+  color: white;
+  background: var(--bg-night);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-night);
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 215, 0, 0.45), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+
+
