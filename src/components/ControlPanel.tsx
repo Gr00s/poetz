@@ -11,10 +11,10 @@ const ControlPanel = ({ gesturesEnabled, onToggleGestures, onToggleMode, mode }:
   const [showTips, setShowTips] = useState(false);
 
   return (
-    <div className="absolute right-4 bottom-4 sm:bottom-4 z-50 flex items-end gap-2 ios-safe-bottom">
-      {/* Tooltip - links van control panel */}
+    <div className="absolute right-4 bottom-4 sm:bottom-4 z-50 flex flex-col sm:flex-row items-end gap-2 ios-safe-bottom">
+      {/* Tooltip - boven op mobile, links op desktop */}
       {showTips && (
-        <div className="bg-[#007BA4]/90 backdrop-blur-md text-white rounded-xl px-3 py-2 text-xs shadow-lg max-w-[200px] mb-0">
+        <div className="bg-[#007BA4]/90 backdrop-blur-md text-white rounded-xl px-3 py-2 text-xs shadow-lg max-w-[200px] order-first sm:order-none mb-2 sm:mb-0">
           {gesturesEnabled ? (
             <>
               <p className="font-bold mb-1">Handgebaren:</p>
