@@ -11,7 +11,7 @@ const ControlPanel = ({ gesturesEnabled, onToggleGestures, onToggleMode, mode }:
   const [showTips, setShowTips] = useState(false);
 
   return (
-    <div className="absolute bottom-4 right-4 z-50 flex items-end gap-2">
+    <div className="absolute right-4 z-50 flex items-end gap-2" style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
       {/* Tooltip - links van control panel */}
       {showTips && (
         <div className="bg-[#007BA4]/90 backdrop-blur-md text-white rounded-xl px-3 py-2 text-xs shadow-lg max-w-[200px] mb-0">

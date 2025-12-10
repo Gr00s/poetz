@@ -38,7 +38,7 @@ const Logo = () => {
   }, []);
 
   return (
-    <div className="absolute bottom-4 left-4 z-50">
+    <div className="absolute left-4 z-50" style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
       <div className="relative">
         <img
           src="/assets/Poetz-logo-800.png"

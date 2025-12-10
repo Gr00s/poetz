@@ -40,7 +40,7 @@ const HandOverlay = ({
       />
 
       {showOverlay && (
-        <div className="absolute bottom-16 right-4 w-[160px] max-w-[40vw] h-[120px] rounded-xl border border-white/20 bg-black/35 backdrop-blur-md overflow-hidden shadow-lg">
+        <div className="absolute right-4 w-[160px] max-w-[40vw] h-[120px] rounded-xl border border-white/20 bg-black/35 backdrop-blur-md overflow-hidden shadow-lg" style={{ bottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>
           {!hasPermission ? (
             <button
               className="w-full h-full flex flex-col items-center justify-center gap-2 text-white/80 hover:text-white"
