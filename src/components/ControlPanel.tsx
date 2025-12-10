@@ -1,55 +1,61 @@
-import { ShapeVariant } from '../types';
+import { useState } from 'react';
 
 interface Props {
   gesturesEnabled: boolean;
   onToggleGestures: () => void;
   onToggleMode: () => void;
   mode: 'formed' | 'chaos';
-  shapeVariant: ShapeVariant;
-  onCycleShape: () => void;
 }
 
-const shapeLabels: Record<ShapeVariant, string> = {
-  'cloud': 'Wolk',
-  'text': 'Tekst',
-  'logo': 'Logo',
-  'logo-filled': 'Gevuld'
-};
+const ControlPanel = ({ gesturesEnabled, onToggleGestures, onToggleMode, mode }: Props) => {
+  const [showTips, setShowTips] = useState(false);
 
-const ControlPanel = ({ gesturesEnabled, onToggleGestures, onToggleMode, mode, shapeVariant, onCycleShape }: Props) => {
   return (
-    <div className="absolute top-4 left-4 z-50 bg-[#007BA4]/70 backdrop-blur-md text-white rounded-xl px-3 py-2 flex flex-col gap-2 shadow-lg">
-      <div className="flex items-center gap-2">
+    <div className="absolute bottom-4 right-4 z-50 flex items-end gap-2">
+      {/* Tooltip - links van control panel */}
+      {showTips && (
+        <div className="bg-[#007BA4]/90 backdrop-blur-md text-white rounded-xl px-3 py-2 text-xs shadow-lg max-w-[200px] mb-0">
+          {gesturesEnabled ? (
+            <>
+              <p className="font-bold mb-1">Handgebaren:</p>
+              <ul className="space-y-1">
+                <li>✋ Open hand → Poetz logo</li>
+                <li>👆 Wijzen → Draai boom</li>
+                <li>✊ Vuist → Terug naar boom</li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <p className="font-bold mb-1">Bestuur met gebaren!</p>
+              <p>Klik op "Aan" en gebruik je handen om de kerstboom te bedienen. Leuk en interactief!</p>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Control buttons */}
+      <div className="bg-[#24B1A0]/80 backdrop-blur-md text-white rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg">
         <button
-          className="flex items-center gap-1 text-sm px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition"
+          className="flex items-center gap-1 text-sm px-2 py-1 rounded-lg bg-[#007BA4]/60 hover:bg-[#007BA4] transition"
           onClick={onToggleGestures}
+          onMouseEnter={() => setShowTips(true)}
+          onMouseLeave={() => setShowTips(false)}
           title="Handgebaren aan/uit"
         >
           <span>✋</span>
-          <span>{gesturesEnabled ? 'Aan' : 'Uit'}</span>
+          <span>{gesturesEnabled ? 'Uit' : 'Aan'}</span>
         </button>
         <button
           className="flex items-center gap-1 text-sm px-2 py-1 rounded-lg bg-[#E85127]/80 hover:bg-[#E85127] transition"
           onClick={onToggleMode}
-          title="Explode/Vorm"
+          title="Poetz/Boom"
         >
-          <span>{mode === 'formed' ? '💥' : '🎄'}</span>
-          <span>{mode === 'formed' ? 'Explode' : 'Form'}</span>
+          <span>{mode === 'formed' ? '☁️' : '🎄'}</span>
+          <span>{mode === 'formed' ? 'Poetz' : 'Boom'}</span>
         </button>
       </div>
-      <button
-        className="flex items-center justify-center gap-1 text-xs px-2 py-1 rounded-lg bg-[#24B1A0]/80 hover:bg-[#24B1A0] transition"
-        onClick={onCycleShape}
-        title="Wissel vorm"
-      >
-        <span>🔄</span>
-        <span>Vorm: {shapeLabels[shapeVariant]}</span>
-      </button>
     </div>
   );
 };
 
 export default ControlPanel;
-
-
-

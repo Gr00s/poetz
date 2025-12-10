@@ -11,13 +11,8 @@ import {
   Material
 } from 'three';
 import { useFrame } from '@react-three/fiber';
-import { DisplayMode, ShapeVariant } from '../types';
-import {
-  generateCloudShapePositions,
-  generateTextShapePositions,
-  generateFullLogoPositions,
-  generateFilledLogoPositions
-} from '../utils/svgSampler';
+import { DisplayMode } from '../types';
+import { generateFullLogoPositions } from '../utils/svgSampler';
 
 const TREE_HEIGHT = 16;
 const TREE_RADIUS = 5.5;
@@ -25,7 +20,6 @@ const TREE_RADIUS = 5.5;
 interface Props {
   mode: DisplayMode;
   isMobile: boolean;
-  shapeVariant: ShapeVariant;
 }
 
 // Create 4-pointed diamond star
@@ -132,22 +126,11 @@ const generateConePositions = (count: number) => {
   return arr;
 };
 
-const generateChaosPositions = (count: number, variant: ShapeVariant) => {
-  switch (variant) {
-    case 'cloud':
-      return generateCloudShapePositions(count, 14, 2.5);
-    case 'text':
-      return generateTextShapePositions(count, 16, 2);
-    case 'logo':
-      return generateFullLogoPositions(count, 16, 2);
-    case 'logo-filled':
-      return generateFilledLogoPositions(count, 16, 2);
-    default:
-      return generateFullLogoPositions(count, 16, 2);
-  }
+const generateChaosPositions = (count: number) => {
+  return generateFullLogoPositions(count, 16, 2);
 };
 
-const ChristmasTree = ({ mode, isMobile, shapeVariant }: Props) => {
+const ChristmasTree = ({ mode, isMobile }: Props) => {
   // Increased item count: 550 desktop, 280 mobile
   const total = isMobile ? 280 : 550;
 
@@ -205,8 +188,8 @@ const ChristmasTree = ({ mode, isMobile, shapeVariant }: Props) => {
 
   const formedPositions = useMemo(() => generateConePositions(total), [total]);
   const chaosPositions = useMemo(
-    () => generateChaosPositions(total, shapeVariant),
-    [total, shapeVariant]
+    () => generateChaosPositions(total),
+    [total]
   );
 
   const currentPositions = useRef<Float32Array>(new Float32Array(total * 3));

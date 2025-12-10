@@ -3,9 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei';
 import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing';
 import { Group } from 'three';
-import { DisplayMode, ShapeVariant } from '../types';
+import { DisplayMode } from '../types';
 import ChristmasTree from './ChristmasTree';
-import TreeTopper from './TreeTopper';
 import Snowfall from './Snowfall';
 import Starfield from './Starfield';
 
@@ -17,7 +16,6 @@ interface SceneProps {
   gestureRotation: number;
   onUserInteraction: () => void;
   onUserRelease: () => void;
-  shapeVariant: ShapeVariant;
 }
 
 const SceneInner = ({
@@ -25,8 +23,7 @@ const SceneInner = ({
   isMobile,
   autoRotateEnabled,
   autoRotateSpeed,
-  gestureRotation,
-  shapeVariant
+  gestureRotation
 }: Omit<SceneProps, 'onUserInteraction' | 'onUserRelease'>) => {
   const groupRef = useRef<Group | null>(null);
 
@@ -48,9 +45,8 @@ const SceneInner = ({
       <directionalLight intensity={0.8} position={[6, 10, 6]} color="#FFF8E7" />
       <directionalLight intensity={0.4} position={[-6, 8, -4]} color="#FFD700" />
       <pointLight intensity={1.5} distance={30} position={[0, 12, 0]} color="#FFD700" />
-      <group ref={groupRef} position={[0, -2, 0]}>
-        <ChristmasTree mode={mode} isMobile={isMobile} shapeVariant={shapeVariant} />
-        <TreeTopper isMobile={isMobile} />
+      <group ref={groupRef} position={[0, 0, 0]}>
+        <ChristmasTree mode={mode} isMobile={isMobile} />
       </group>
       <Snowfall isMobile={isMobile} />
       <Starfield isMobile={isMobile} />
@@ -71,12 +67,11 @@ const Scene = ({
   autoRotateSpeed,
   gestureRotation,
   onUserInteraction,
-  onUserRelease,
-  shapeVariant
+  onUserRelease
 }: SceneProps) => {
   return (
     <Canvas shadows dpr={[1, 1.5]}>
-      <PerspectiveCamera makeDefault position={[0, 6, 18]} fov={60} />
+      <PerspectiveCamera makeDefault position={[0, 2, 20]} fov={60} />
       <Suspense fallback={null}>
         <SceneInner
           mode={mode}
@@ -84,7 +79,6 @@ const Scene = ({
           autoRotateEnabled={autoRotateEnabled}
           autoRotateSpeed={autoRotateSpeed}
           gestureRotation={gestureRotation}
-          shapeVariant={shapeVariant}
         />
       </Suspense>
       <OrbitControls
@@ -101,6 +95,3 @@ const Scene = ({
 };
 
 export default Scene;
-
-
-

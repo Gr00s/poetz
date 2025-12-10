@@ -33,7 +33,7 @@ const Snowfall = ({ isMobile }: Props) => {
     positions.current.forEach((p, i) => {
       p.pos.y -= p.speed * delta * 1.2;
       p.pos.x += Math.sin((i + 1) * 0.5 + performance.now() * 0.001) * delta * 0.2;
-      if (p.pos.y < -2) {
+      if (p.pos.y < -6) {
         p.pos.y = 10 + Math.random() * 4;
         p.pos.x = (Math.random() - 0.5) * 18;
         p.pos.z = (Math.random() - 0.5) * 18;

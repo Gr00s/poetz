@@ -4,12 +4,10 @@ import ChristmasWish from './components/ChristmasWish';
 import ControlPanel from './components/ControlPanel';
 import Logo from './components/Logo';
 import HandOverlay from './components/HandOverlay';
-import { DisplayMode, GestureType, ShapeVariant } from './types';
+import { DisplayMode, GestureType } from './types';
 import { useMobileDetect } from './hooks/useMobileDetect';
 import { useAutoRotate } from './hooks/useAutoRotate';
 import { useHandTracking } from './hooks/useHandTracking';
-
-const shapeVariants: ShapeVariant[] = ['cloud', 'text', 'logo', 'logo-filled'];
 
 const App = () => {
   const isMobile = useMobileDetect();
@@ -19,14 +17,6 @@ const App = () => {
   const [hasHand, setHasHand] = useState(false);
   const autoRotate = useAutoRotate({ baseSpeed: 0.4, resumeDelayMs: 3000 });
   const [hideOverlay, setHideOverlay] = useState(false);
-  const [shapeVariant, setShapeVariant] = useState<ShapeVariant>('logo');
-
-  const cycleShape = () => {
-    setShapeVariant((current) => {
-      const idx = shapeVariants.indexOf(current);
-      return shapeVariants[(idx + 1) % shapeVariants.length];
-    });
-  };
 
   useEffect(() => {
     const update = () => setHideOverlay(window.innerWidth < 480);
@@ -87,7 +77,7 @@ const App = () => {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#050a10] text-white">
-      <ControlPanel gesturesEnabled={gesturesEnabled} onToggleGestures={toggleGestures} onToggleMode={toggleMode} mode={mode} shapeVariant={shapeVariant} onCycleShape={cycleShape} />
+      <ControlPanel gesturesEnabled={gesturesEnabled} onToggleGestures={toggleGestures} onToggleMode={toggleMode} mode={mode} />
       <div className="absolute top-0 left-0 right-0 z-10">
         <ChristmasWish />
       </div>
@@ -100,7 +90,6 @@ const App = () => {
           gestureRotation={gestureRotation}
           onUserInteraction={autoRotate.pause}
           onUserRelease={autoRotate.pause}
-          shapeVariant={shapeVariant}
         />
       </div>
       <Logo />
@@ -119,4 +108,3 @@ const App = () => {
 };
 
 export default App;
-
