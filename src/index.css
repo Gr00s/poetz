@@ -26,7 +26,18 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--bg-night);
-  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS Safari safe area support */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  :root {
+    --safe-area-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Bottom UI elements need extra padding on iOS */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .shimmer {
