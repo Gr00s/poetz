@@ -164,7 +164,7 @@ export const useHandTracking = ({
       }
 
       const hands = new Hands({
-        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`
       });
       hands.setOptions({
         maxNumHands: 1,
@@ -174,6 +174,9 @@ export const useHandTracking = ({
         modelComplexity: 0
       });
       hands.onResults(handleResults);
+
+      // Initialize MediaPipe model (required before sending frames)
+      await hands.initialize();
       handsRef.current = hands;
 
       // Use requestAnimationFrame instead of MediaPipe Camera utility (better iOS support)
