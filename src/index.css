@@ -31,10 +31,10 @@ body {
 /* iOS Safari safe area - use fixed offset for mobile */
 @media (max-width: 768px) and (pointer: coarse) {
   .ios-safe-bottom {
-    bottom: 5.5rem !important;
+    bottom: 5rem !important;
   }
   .ios-safe-bottom-overlay {
-    bottom: 9rem !important;
+    bottom: 8.5rem !important;
   }
 }
 

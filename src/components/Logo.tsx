@@ -38,7 +38,7 @@ const Logo = () => {
   }, []);
 
   return (
-    <div className="absolute left-4 bottom-4 sm:bottom-4 z-50 ios-safe-bottom">
+    <div className="absolute left-4 bottom-6 sm:bottom-6 z-50 ios-safe-bottom">
       <div className="relative">
         <img
           src="/assets/Poetz-logo-800.png"
