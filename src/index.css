@@ -28,16 +28,14 @@ body {
   background: var(--bg-night);
 }
 
-/* iOS Safari safe area support */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  :root {
-    --safe-area-bottom: env(safe-area-inset-bottom);
+/* iOS Safari safe area - use fixed offset for mobile */
+@media (max-width: 768px) and (pointer: coarse) {
+  .ios-safe-bottom {
+    bottom: 5.5rem !important;
   }
-}
-
-/* Bottom UI elements need extra padding on iOS */
-.safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  .ios-safe-bottom-overlay {
+    bottom: 9rem !important;
+  }
 }
 
 .shimmer {
